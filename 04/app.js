@@ -2,12 +2,20 @@ const elements = document.querySelectorAll('div');
 
 const addClass = function(e) {
     e.stopPropagation();
-    e.currentTarget.classList.add('clicked');
+    const allDivs = Array.from(elements);
+    
+    allDivs.forEach((div, index) => {
+        setTimeout(() => {
+            div.classList.add('clicked');
+        }, 3000 * index);
+    });
 }
 
 elements.forEach( function(item) {
         item.addEventListener('click', addClass);
 });
+
+
 
 const body = document.querySelector('body');
 
