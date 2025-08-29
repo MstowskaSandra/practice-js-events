@@ -10,31 +10,30 @@ const stats = {
 /* tutaj umieść swój kod */
 const elements = document.querySelectorAll('p.text');
 
+function increment(category, key) {
+    if (category[key] !== undefined) {
+        category[key]++;
+    } else {
+        category[key] = 1;
+    }
+}
+
 const counter = function(e) {
     
     const pId = e.currentTarget.dataset.id;
-    if(stats.paragraphs[pId] !== undefined) {
-        stats.paragraphs[pId]++;
-    } else {
-        stats.paragraphs[pId] = 1;
-    }
+    increment(stats.paragraphs, pId);
     
     if(e.target.tagName === 'A' && e.target.classList.contains('link')) {
         e.preventDefault();
         const href = e.target.getAttribute('href');
-
-        if(stats.links[href] !== undefined) {
-            stats.links[href]++;
-        } else {
-            stats.links[href] = 1;
-        }
+        increment(stats.links, href);
     }
 
     fireCustomEvent(statsElement, 'render');
-
 }
 
 elements.forEach(p => p.addEventListener('click', counter));
+
 
 /* nie modyfikuj kodu poniżej, ale przeanalizuj go */
 
